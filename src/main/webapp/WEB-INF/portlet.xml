@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<portlet-app version="2.0"
+	xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	id="pe.apiconz.rest.portlet.example02">
+
+	<portlet>
+		<portlet-name>BPMInboxPortlet</portlet-name>
+		<portlet-class>pe.com.hydra.reapro.portlet.BPMInboxPortlet</portlet-class>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>VIEW</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<portlet-info>
+			<title>BPM Inbox Portlet</title>
+		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>bpd.id</name>
+				<value>25.c904b3b1-afc1-4698-bf5a-a20892c20275</value>
+			</preference>
+			<preference>
+				<name>process.app.id</name>
+				<value>2066.9ab0d0c6-d92c-4355-9ed5-d8a05acdc4b0</value>
+			</preference>
+			<preference>
+				<name>bpm.hostname</name>
+				<value>bpm8.onp.gob.pe</value>
+			</preference>
+			<preference>
+				<name>bpm.port</name>
+				<value>9080</value>
+			</preference>
+		</portlet-preferences>
+	</portlet>
+
+</portlet-app>

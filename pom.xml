@@ -42,15 +42,27 @@
 
 		<!-- Esta es un dependencia local a raíz de otro proyecto -->
 		<!-- dependency -->
-			<!-- groupId>bpm.rest</groupId -->
-			<!-- artifactId>bpm-rest-client</artifactId -->
-			<!-- version>1.0</version -->
+		<!-- groupId>bpm.rest</groupId -->
+		<!-- artifactId>bpm-rest-client</artifactId -->
+		<!-- version>1.0</version -->
 		<!-- /dependency -->
 
 		<dependency>
 			<groupId>bpm.rest.client</groupId>
 			<artifactId>bpm-rest-client-maven</artifactId>
 			<version>[0.0.1-SNAPSHOT,)</version>
+		</dependency>
+
+		<dependency>
+			<groupId>displaytag</groupId>
+			<artifactId>displaytag</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>displaytag</groupId>
+			<artifactId>displaytag-portlet</artifactId>
+			<version>1.2</version>
 		</dependency>
 
 
@@ -70,21 +82,21 @@
 			<version>2.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.4</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.portals.pluto</groupId>
 			<artifactId>pluto-util</artifactId>
 			<version>2.0.3</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -92,7 +104,7 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.ibm.ws.runtime</groupId>
 			<artifactId>runtime</artifactId>
@@ -109,7 +121,7 @@
 			<url>http://maven.restlet.org</url>
 		</repository>
 	</repositories>
-	
+
 	<build>
 		<finalName>bpm-inbox-portlet</finalName>
 	</build>

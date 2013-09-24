@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
-	id="pe.apiconz.rest.portlet.example02">
+	id="pe.com.hydra.reapro.portletapp.BPMInboxPortlet">
 
 	<portlet>
 		<portlet-name>BPMInboxPortlet</portlet-name>

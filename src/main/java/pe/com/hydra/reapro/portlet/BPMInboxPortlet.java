@@ -1,6 +1,8 @@
 package pe.com.hydra.reapro.portlet;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -8,9 +10,12 @@ import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
+import javax.portlet.ProcessAction;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.xml.namespace.QName;
 
 import org.json.JSONException;
 
@@ -20,10 +25,14 @@ import bpm.rest.client.authentication.AuthenticationTokenHandlerException;
 
 public class BPMInboxPortlet extends GenericPortlet {
 
+	public static String NAMESPACE = "http://www.ibm.com/wps/accelerators/utl/taskLaunching";
+
 	@Override
 	protected void doView(RenderRequest request, RenderResponse response)
 			throws PortletException, IOException {
 
+		getListOfParameterNames(request);
+		
 		response.setContentType("text/html");
 		response.getWriter().println("Hello World");
 		PortletPreferences preferences = request.getPreferences();
@@ -65,11 +74,46 @@ public class BPMInboxPortlet extends GenericPortlet {
 
 	}
 
-	@Override
-	public void processAction(ActionRequest request, ActionResponse response)
+	@ProcessAction(name = "showTaskCoach")
+	public void showTaskCoach(ActionRequest request, ActionResponse response)
 			throws PortletException, IOException {
-		// TODO Auto-generated method stub
-		super.processAction(request, response);
+
+		String taskID = request.getParameter("selectedTaskID");
+		String providerID = "tpi1378833781728";
+		System.out.println("selectedTaskID =" + taskID);
+
+		String xmlTaskID = "{\"TaskID\":\"" + taskID + "\",\"ProviderID\":\""
+				+ providerID + "\"}";
+
+		System.out.println("xmlTaskID=" + xmlTaskID);
+		response.setEvent(new QName(NAMESPACE, "TaskSelection"), xmlTaskID);
+		getListOfParameterNames(request);
+		response.setRenderParameters(request.getParameterMap());
+		
+		
+
+	}
+
+	private void getListOfAttributeNames(PortletRequest request) {
+		Enumeration e = request.getAttributeNames();
+		System.out.println("=================================");
+		while (e.hasMoreElements()) {
+			String key = (String) e.nextElement();
+			System.out.println("-" + key);
+		}
+		System.out.println("=================================");
+	}
+
+	private void getListOfParameterNames(PortletRequest request) {
+		Enumeration e = request.getParameterNames();
+		System.out.println("=================================");
+		System.out.println("========Parameter Names==========");
+		System.out.println("=================================");
+		while (e.hasMoreElements()) {
+			String key = (String) e.nextElement();
+			System.out.println("-" + key);
+		}
+		System.out.println("=================================");
 	}
 
 }

@@ -34,6 +34,16 @@
 				<value>9080</value>
 			</preference>
 		</portlet-preferences>
+		<supported-publishing-event>
+			<qname xmlns:pbns="http://www.ibm.com/wps/accelerators/utl/taskLaunching">pbns:TaskSelection</qname>
+		</supported-publishing-event>
 	</portlet>
+
+
+	<event-definition>
+		<description />
+		<qname xmlns:pbns="http://www.ibm.com/wps/accelerators/utl/taskLaunching">pbns:TaskSelection</qname>
+		<value-type>java.lang.String</value-type>
+	</event-definition>
 
 </portlet-app>

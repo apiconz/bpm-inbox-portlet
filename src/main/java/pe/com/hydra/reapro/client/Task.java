@@ -8,6 +8,60 @@ public class Task implements Serializable {
 	private String taskId;
 	private String taskAssignedPerson;
 	private String taskAssignedPersonRole;
+	private String taskDueDate;
+	private String instanceId;
+	private String taskActivityName;
+	private String taskReceivedDate;
+	private String taskPriority;
+	private String taskStatus;
+	
+	public String getTaskDueDate() {
+		return taskDueDate;
+	}
+
+	public void setTaskDueDate(String taskDueDate) {
+		this.taskDueDate = taskDueDate;
+	}
+
+	public String getInstanceId() {
+		return instanceId;
+	}
+
+	public void setInstanceId(String instanceId) {
+		this.instanceId = instanceId;
+	}
+
+	public String getTaskActivityName() {
+		return taskActivityName;
+	}
+
+	public void setTaskActivityName(String taskActivityName) {
+		this.taskActivityName = taskActivityName;
+	}
+
+	public String getTaskReceivedDate() {
+		return taskReceivedDate;
+	}
+
+	public void setTaskReceivedDate(String taskReceivedDate) {
+		this.taskReceivedDate = taskReceivedDate;
+	}
+
+	public String getTaskPriority() {
+		return taskPriority;
+	}
+
+	public void setTaskPriority(String taskPriority) {
+		this.taskPriority = taskPriority;
+	}
+
+	public String getTaskStatus() {
+		return taskStatus;
+	}
+
+	public void setTaskStatus(String taskStatus) {
+		this.taskStatus = taskStatus;
+	}
 
 	public String getName() {
 		return name;

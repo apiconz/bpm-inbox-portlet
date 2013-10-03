@@ -14,6 +14,11 @@
 }
 -->
 </style>
+<script>
+function receiveFromCoach(aString) {
+    alert(aString);
+}
+</script>
 <%
 	List taskList = (List) renderRequest.getPortletSession()
 			.getAttribute("taskList", PortletSession.PORTLET_SCOPE);
@@ -38,7 +43,7 @@
 			<td>N&uacute;mero Proceso</td>
 			<td>N&uacute;mero Actividad</td>
 			<td>Rol Asignado</td>
-			<td>Fecha Creaci&oacute;n</td>
+			<td>Fecha de Vencimiento</td>
 			<td>N&uacute;mero Expediente</td>
 		</tr>
 	</thead>
@@ -56,7 +61,7 @@
 			<td>N&uacute;mero Proceso</td>
 			<td>N&uacute;mero Actividad</td>
 			<td><%=task.getTaskAssignedPersonRole()%></td>
-			<td>Fecha Creaci&oacute;n</td>
+			<td><%=task.getTaskDueDate() %></td>
 			<td>N&uacute;mero Expediente</td>
 		</tr>
 

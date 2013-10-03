@@ -27,11 +27,11 @@
 			</preference>
 			<preference>
 				<name>bpm.hostname</name>
-				<value>bpm8.onp.gob.pe</value>
+				<value>wp8.onp.gob.pe</value>
 			</preference>
 			<preference>
 				<name>bpm.port</name>
-				<value>9080</value>
+				<value>80</value>
 			</preference>
 		</portlet-preferences>
 		<supported-publishing-event>

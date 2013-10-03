@@ -39,8 +39,10 @@ public class BPMInboxPortlet extends GenericPortlet {
 		// Hostname of the IBM Business Process Manager server
 		String hostname = preferences.getValue("bpm.hostname",
 				"bpm8.onp.gob.pe");
+		System.out.println("hostname=" + hostname);
 		// IBM Business Process Manager server port number
 		int port = Integer.parseInt(preferences.getValue("bpm.port", "9080"));
+		System.out.println("port=" + port);
 
 		List taskList = null;
 

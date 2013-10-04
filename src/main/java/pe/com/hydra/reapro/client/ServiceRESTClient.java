@@ -49,6 +49,8 @@ public class ServiceRESTClient {
 			Task task = new Task();
 			task.setName(taskItem.getString("taskActivityName"));
 			task.setTaskId(taskId);
+			task.setHiringManager(taskItem.getString("hiringManager"));
+			task.setDepartment(taskItem.getString("department"));
 			task.setTaskAssignedPerson(taskItem.getJSONObject("taskAssignedTo")
 					.getString("who"));
 			task.setTaskAssignedPersonRole(taskItem.getJSONObject(

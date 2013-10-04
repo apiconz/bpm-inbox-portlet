@@ -45,6 +45,8 @@ function receiveFromCoach(aString) {
 			<td>Rol Asignado</td>
 			<td>Fecha de Vencimiento</td>
 			<td>N&uacute;mero Expediente</td>
+			<td>Departamento</td>
+			<td>Hiring Manager</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -63,6 +65,8 @@ function receiveFromCoach(aString) {
 			<td><%=task.getTaskAssignedPersonRole()%></td>
 			<td><%=task.getTaskDueDate() %></td>
 			<td>N&uacute;mero Expediente</td>
+			<td><%=task.getDepartment() %></td>
+			<td><%=task.getHiringManager() %></td>
 		</tr>
 
 		<%

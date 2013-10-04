@@ -14,7 +14,25 @@ public class Task implements Serializable {
 	private String taskReceivedDate;
 	private String taskPriority;
 	private String taskStatus;
+	private String hiringManager;
+	private String department;
 	
+	public String getHiringManager() {
+		return hiringManager;
+	}
+
+	public void setHiringManager(String hiringManager) {
+		this.hiringManager = hiringManager;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
 	public String getTaskDueDate() {
 		return taskDueDate;
 	}

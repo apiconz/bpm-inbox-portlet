@@ -7,12 +7,16 @@ import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.Event;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 import javax.portlet.ProcessAction;
+import javax.portlet.ProcessEvent;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.xml.namespace.QName;
@@ -32,7 +36,7 @@ public class BPMInboxPortlet extends GenericPortlet {
 			throws PortletException, IOException {
 
 		getListOfParameterNames(request);
-		
+
 		response.setContentType("text/html");
 		response.getWriter().println("Hello World");
 		PortletPreferences preferences = request.getPreferences();
@@ -76,6 +80,15 @@ public class BPMInboxPortlet extends GenericPortlet {
 
 	}
 
+	@ProcessEvent(name = "refresh")
+	public void reloadTaskList(EventRequest request, EventResponse response)
+			throws PortletException, IOException {
+		Event event = request.getEvent();
+
+		System.out.println("Event Name-->" + event.getName());
+		System.out.println("Event Value-->" + event.getValue());
+	}
+
 	@ProcessAction(name = "showTaskCoach")
 	public void showTaskCoach(ActionRequest request, ActionResponse response)
 			throws PortletException, IOException {
@@ -91,8 +104,6 @@ public class BPMInboxPortlet extends GenericPortlet {
 		response.setEvent(new QName(NAMESPACE, "TaskSelection"), xmlTaskID);
 		getListOfParameterNames(request);
 		response.setRenderParameters(request.getParameterMap());
-		
-		
 
 	}
 

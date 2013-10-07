@@ -34,16 +34,23 @@
 				<value>80</value>
 			</preference>
 		</portlet-preferences>
+		<supported-processing-event>
+			<name>refresh</name>
+		</supported-processing-event>
 		<supported-publishing-event>
 			<qname xmlns:pbns="http://www.ibm.com/wps/accelerators/utl/taskLaunching">pbns:TaskSelection</qname>
 		</supported-publishing-event>
 	</portlet>
 
-
+	<default-namespace>http://pe.apiconz.defaultnamespace/</default-namespace>
 	<event-definition>
-		<description />
+		<name>refresh</name>
+		<value-type>java.lang.String</value-type>
+	</event-definition>
+	<event-definition>
 		<qname xmlns:pbns="http://www.ibm.com/wps/accelerators/utl/taskLaunching">pbns:TaskSelection</qname>
 		<value-type>java.lang.String</value-type>
 	</event-definition>
+
 
 </portlet-app>

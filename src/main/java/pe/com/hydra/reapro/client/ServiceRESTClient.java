@@ -47,8 +47,9 @@ public class ServiceRESTClient {
 			JSONObject taskItem = tasks.getJSONObject(i);
 			String taskId = taskItem.getString("taskId");
 			Task task = new Task();
-			task.setName(taskItem.getString("taskActivityName"));
+			task.setTaskActivityName(taskItem.getString("taskActivityName"));
 			task.setTaskId(taskId);
+			task.setBpdName(taskItem.getString("bpdName"));
 			task.setHiringManager(taskItem.getString("hiringManager"));
 			task.setDepartment(taskItem.getString("department"));
 			task.setTaskAssignedPerson(taskItem.getJSONObject("taskAssignedTo")
@@ -58,6 +59,7 @@ public class ServiceRESTClient {
 			task.setTaskDueDate(formateDate(taskItem.getString("taskDueDate")));
 			task.setTaskReceivedDate(formateDate(taskItem
 					.getString("taskReceivedDate")));
+			task.setTaskStatus(taskItem.getString("taskStatus"));
 			tasksList.add(task);
 		}
 		System.out.println("taskList items:" + tasksList.size());

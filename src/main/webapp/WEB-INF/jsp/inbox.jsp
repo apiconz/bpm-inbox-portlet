@@ -36,17 +36,17 @@ function receiveFromCoach(aString) {
 	} else {
 %>
 
-<table>
+<table border="1">
 	<thead>
 		<tr>
-			<td>ID Tarea</td>
-			<td>N&uacute;mero Proceso</td>
-			<td>N&uacute;mero Actividad</td>
-			<td>Rol Asignado</td>
-			<td>Fecha de Vencimiento</td>
-			<td>N&uacute;mero Expediente</td>
-			<td>Departamento</td>
-			<td>Hiring Manager</td>
+			<th>ID Tarea</th>
+			<th>Nombre BPD</th>
+			<th>Nombre de Actividad</th>
+			<th>Rol Asignado</th>
+			<th>Fecha de Vencimiento</th>
+			<th>Departamento</th>
+			<th>Hiring Manager</th>
+			<th>Status Tarea</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -60,13 +60,13 @@ function receiveFromCoach(aString) {
 					<portlet:param name="javax.portlet.action" value="showTaskCoach" />
 					<portlet:param name="selectedTaskID" value="<%=task.getTaskId()%>" />
 				</portlet:actionURL> <a href="<%=actionURL%>"><%=task.getTaskId()%></a></td>
-			<td>N&uacute;mero Proceso</td>
-			<td>N&uacute;mero Actividad</td>
+			<td><%=task.getBpdName() %></td>
+			<td><%=task.getTaskActivityName() %></td>
 			<td><%=task.getTaskAssignedPersonRole()%></td>
 			<td><%=task.getTaskDueDate() %></td>
-			<td>N&uacute;mero Expediente</td>
-			<td><%=task.getDepartment() %></td>
-			<td><%=task.getHiringManager() %></td>
+			<td><%=(task.getDepartment().equals("null"))?"":task.getDepartment() %></td>
+			<td><%=(task.getHiringManager().equals("null"))?"":task.getHiringManager() %></td>
+			<td><%=task.getTaskStatus() %></td>
 		</tr>
 
 		<%

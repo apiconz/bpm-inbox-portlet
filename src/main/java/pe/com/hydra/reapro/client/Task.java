@@ -16,7 +16,16 @@ public class Task implements Serializable {
 	private String taskStatus;
 	private String hiringManager;
 	private String department;
+	private String bpdName;
 	
+	public String getBpdName() {
+		return bpdName;
+	}
+
+	public void setBpdName(String bpdName) {
+		this.bpdName = bpdName;
+	}
+
 	public String getHiringManager() {
 		return hiringManager;
 	}

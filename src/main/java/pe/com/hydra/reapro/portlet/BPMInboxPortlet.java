@@ -2,7 +2,6 @@ package pe.com.hydra.reapro.portlet;
 
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -37,8 +36,8 @@ public class BPMInboxPortlet extends GenericPortlet {
 
 		getListOfParameterNames(request);
 
-		response.setContentType("text/html");
-		response.getWriter().println("Hello World");
+		response.setContentType("textxhtml");
+		//response.getWriter().println("Hello World");
 		PortletPreferences preferences = request.getPreferences();
 		// Hostname of the IBM Business Process Manager server
 		String hostname = preferences.getValue("bpm.hostname",

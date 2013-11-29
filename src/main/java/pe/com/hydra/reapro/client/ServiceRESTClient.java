@@ -36,13 +36,35 @@ public class ServiceRESTClient {
 	public List<Task> obtenerBandejaDeTareas() throws BPMClientException,
 			AuthenticationTokenHandlerException, JSONException {
 		System.out.println("--> obtenerBandejaDeTareas");
-		
+
 		resultados = client.getInbox();
-		
+
 		System.out.println("" + resultados.toString());
-		
+
 		JSONArray tasks = resultados.getJSONObject("data").getJSONArray("data");
 		List<Task> tasksList = new ArrayList<Task>();
+		convertJSonArrayToList(tasks, tasksList);
+		System.out.println("taskList items:" + tasksList.size());
+		return tasksList;
+	}
+
+	public List<Task> obtenerBandejaHistorico() throws BPMClientException,
+			AuthenticationTokenHandlerException, JSONException {
+		System.out.println("--> obtenerBandejaDeTareas");
+
+		resultados = client.getHistorical();
+
+		System.out.println("" + resultados.toString());
+
+		JSONArray tasks = resultados.getJSONObject("data").getJSONArray("data");
+		List<Task> tasksList = new ArrayList<Task>();
+		convertJSonArrayToList(tasks, tasksList);
+		System.out.println("historical taskList items:" + tasksList.size());
+		return tasksList;
+	}
+
+	private void convertJSonArrayToList(JSONArray tasks, List<Task> tasksList)
+			throws JSONException {
 		for (int i = 0; i < tasks.length(); i++) {
 			JSONObject taskItem = tasks.getJSONObject(i);
 			String taskId = taskItem.getString("taskId");
@@ -62,8 +84,6 @@ public class ServiceRESTClient {
 			task.setTaskStatus(taskItem.getString("taskStatus"));
 			tasksList.add(task);
 		}
-		System.out.println("taskList items:" + tasksList.size());
-		return tasksList;
 	}
 
 	private String formateDate(String originalDate) {

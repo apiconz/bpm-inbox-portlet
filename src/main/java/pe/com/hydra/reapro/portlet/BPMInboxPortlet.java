@@ -3,6 +3,8 @@ package pe.com.hydra.reapro.portlet;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -13,9 +15,11 @@ import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.PortletSession;
 import javax.portlet.ProcessAction;
 import javax.portlet.ProcessEvent;
+import javax.portlet.RenderMode;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.xml.namespace.QName;
@@ -28,24 +32,41 @@ import bpm.rest.client.authentication.AuthenticationTokenHandlerException;
 
 public class BPMInboxPortlet extends GenericPortlet {
 
+	private static final String VIEW_JSP = "/WEB-INF/jsp/inbox.jsp";
+	private static final String CONFIG_JSP = "/WEB-INF/jsp/config.jsp";
+	private static final String EDIT_JSP = "/WEB-INF/jsp/edit.jsp";
+
+	Logger logger = Logger.getLogger(BPMInboxPortlet.class.getName());
+	
 	public static String NAMESPACE = "http://www.ibm.com/wps/accelerators/utl/taskLaunching";
 
+	@RenderMode(name="config")
+	protected void doConfig(RenderRequest renderRequest, RenderResponse renderResponse)
+			throws PortletException, IOException {
+		include(CONFIG_JSP, renderRequest, renderResponse);
+	}
+	
+	@RenderMode(name="edit")
+	protected void doEdit(RenderRequest renderRequest, RenderResponse renderResponse)
+			throws PortletException, IOException {
+		include(EDIT_JSP, renderRequest, renderResponse);
+	}
+	
 	@Override
-	protected void doView(RenderRequest request, RenderResponse response)
+	protected void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws PortletException, IOException {
 
-		getListOfParameterNames(request);
+		getListOfParameterNames(renderRequest);
 
-		response.setContentType("textxhtml");
-		//response.getWriter().println("Hello World");
-		PortletPreferences preferences = request.getPreferences();
+		renderResponse.setContentType("text/html");
+		PortletPreferences preferences = renderRequest.getPreferences();
 		// Hostname of the IBM Business Process Manager server
 		String hostname = preferences.getValue("bpm.hostname",
 				"bpm8.onp.gob.pe");
-		System.out.println("hostname=" + hostname);
+		logger.info("hostname=" + hostname);
 		// IBM Business Process Manager server port number
 		int port = Integer.parseInt(preferences.getValue("bpm.port", "9080"));
-		System.out.println("port=" + port);
+		logger.info("port=" + port);
 
 		List taskList = null;
 
@@ -65,17 +86,17 @@ public class BPMInboxPortlet extends GenericPortlet {
 		}
 
 		PortletSession portletSession;
-		if (request.isRequestedSessionIdValid()) {
-			System.out.println("session is valid");
-			portletSession = request.getPortletSession(false);
+		if (renderRequest.isRequestedSessionIdValid()) {
+			logger.info("session is valid");
+			portletSession = renderRequest.getPortletSession(false);
 		} else {
-			System.out.println("session is not valid");
-			portletSession = request.getPortletSession(true);
+			logger.info("session is not valid");
+			portletSession = renderRequest.getPortletSession(true);
 		}
 		portletSession.setAttribute("taskList", taskList);
 
-		getPortletContext().getRequestDispatcher("/WEB-INF/jsp/inbox.jsp")
-				.include(request, response);
+		include(VIEW_JSP, renderRequest, renderResponse);
+		
 
 	}
 
@@ -84,8 +105,8 @@ public class BPMInboxPortlet extends GenericPortlet {
 			throws PortletException, IOException {
 		Event event = request.getEvent();
 
-		System.out.println("Event Name-->" + event.getName());
-		System.out.println("Event Value-->" + event.getValue());
+		logger.info("Event Name-->" + event.getName());
+		logger.info("Event Value-->" + event.getValue());
 	}
 
 	@ProcessAction(name = "showTaskCoach")
@@ -94,12 +115,12 @@ public class BPMInboxPortlet extends GenericPortlet {
 
 		String taskID = request.getParameter("selectedTaskID");
 		String providerID = "tpi1378833781728";
-		System.out.println("selectedTaskID =" + taskID);
+		logger.info("selectedTaskID =" + taskID);
 
 		String xmlTaskID = "{\"TaskID\":\"" + taskID + "\",\"ProviderID\":\""
 				+ providerID + "\"}";
 
-		System.out.println("xmlTaskID=" + xmlTaskID);
+		logger.info("xmlTaskID=" + xmlTaskID);
 		response.setEvent(new QName(NAMESPACE, "TaskSelection"), xmlTaskID);
 		getListOfParameterNames(request);
 		response.setRenderParameters(request.getParameterMap());
@@ -108,24 +129,40 @@ public class BPMInboxPortlet extends GenericPortlet {
 
 	private void getListOfAttributeNames(PortletRequest request) {
 		Enumeration e = request.getAttributeNames();
-		System.out.println("=================================");
+		logger.info("=================================");
 		while (e.hasMoreElements()) {
 			String key = (String) e.nextElement();
-			System.out.println("-" + key);
+			logger.info("-" + key);
 		}
-		System.out.println("=================================");
+		logger.info("=================================");
 	}
 
 	private void getListOfParameterNames(PortletRequest request) {
 		Enumeration e = request.getParameterNames();
-		System.out.println("=================================");
-		System.out.println("========Parameter Names==========");
-		System.out.println("=================================");
+		logger.info("=================================");
+		logger.info("========Parameter Names==========");
+		logger.info("=================================");
 		while (e.hasMoreElements()) {
 			String key = (String) e.nextElement();
-			System.out.println("-" + key);
+			logger.info("-" + key);
 		}
-		System.out.println("=================================");
+		logger.info("=================================");
 	}
 
+	protected void include(
+            String path, RenderRequest renderRequest,
+            RenderResponse renderResponse)
+        throws IOException, PortletException {
+ 
+        PortletRequestDispatcher portletRequestDispatcher =
+            getPortletContext().getRequestDispatcher(path);
+ 
+        if (portletRequestDispatcher == null) {
+            logger.info(path + " is not a valid include");
+        }
+        else {
+            portletRequestDispatcher.include(renderRequest, renderResponse);
+        }
+    }
+	
 }

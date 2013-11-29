@@ -10,7 +10,9 @@
 		<portlet-class>pe.com.hydra.reapro.portlet.BPMInboxPortlet</portlet-class>
 		<supports>
 			<mime-type>text/html</mime-type>
-			<portlet-mode>VIEW</portlet-mode>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
 		</supports>
 		<supported-locale>en</supported-locale>
 		<portlet-info>
@@ -41,6 +43,45 @@
 			<qname xmlns:pbns="http://www.ibm.com/wps/accelerators/utl/taskLaunching">pbns:TaskSelection</qname>
 		</supported-publishing-event>
 	</portlet>
+
+
+	<portlet>
+		<portlet-name>BPMHistoricalPortlet</portlet-name>
+		<portlet-class>pe.com.hydra.reapro.portlet.HistoricalPortlet</portlet-class>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>VIEW</portlet-mode>
+		</supports>
+		<supported-locale>en</supported-locale>
+		<portlet-info>
+			<title>BPM Historical Portlet</title>
+		</portlet-info>
+		<portlet-preferences>
+			<preference>
+				<name>bpd.id</name>
+				<value>25.c904b3b1-afc1-4698-bf5a-a20892c20275</value>
+			</preference>
+			<preference>
+				<name>process.app.id</name>
+				<value>2066.9ab0d0c6-d92c-4355-9ed5-d8a05acdc4b0</value>
+			</preference>
+			<preference>
+				<name>bpm.hostname</name>
+				<value>wp8.onp.gob.pe</value>
+			</preference>
+			<preference>
+				<name>bpm.port</name>
+				<value>80</value>
+			</preference>
+		</portlet-preferences>
+		<supported-processing-event>
+			<name>refresh</name>
+		</supported-processing-event>
+		<supported-publishing-event>
+			<qname xmlns:pbns="http://www.ibm.com/wps/accelerators/utl/taskLaunching">pbns:TaskSelection</qname>
+		</supported-publishing-event>
+	</portlet>
+
 
 	<default-namespace>http://pe.apiconz.defaultnamespace/</default-namespace>
 	<event-definition>
